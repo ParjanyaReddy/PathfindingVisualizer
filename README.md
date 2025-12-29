@@ -1,196 +1,106 @@
-# 🗺️ PathFinding Visualizer
+# PathFinding Visualizer
 
-A professional-grade **interactive pathfinding algorithm visualizer** built with Python and PyGame. Visualize how popular graph traversal and pathfinding algorithms explore a grid to find the shortest path between two points.
+An interactive visualization tool for popular pathfinding algorithms built with Python and PyGame. Watch how BFS, DFS, Dijkstra, and A* explore a grid to find the shortest path between two points.
 
-![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
-![PyGame](https://img.shields.io/badge/PyGame-2.5.2-green.svg)
-![License](https://img.shields.io/badge/License-MIT-yellow.svg)
+## What It Does
 
----
+This visualizer lets you see exactly how different pathfinding algorithms work. You can place start and end points, draw walls, or generate random mazes, then watch as the algorithm searches for a path. Each algorithm has its own approach and trade-offs, which become really clear when you see them side-by-side.
 
-## ✨ Features
+## Features
 
-### 🔍 **4 Pathfinding Algorithms**
-- **BFS (Breadth-First Search)** - Guarantees shortest path (unweighted)
-- **DFS (Depth-First Search)** - Explores deeply before backtracking
-- **Dijkstra's Algorithm** - Shortest path with weighted edges
-- **A\* (A-Star)** - Optimal pathfinding with heuristic optimization
+**Four Classic Algorithms:**
+- **BFS** - Explores layer by layer, guarantees shortest path
+- **DFS** - Goes deep first, doesn't guarantee shortest path
+- **Dijkstra** - Like BFS but handles weighted paths
+- **A\*** - Uses heuristics to find paths faster than Dijkstra
 
-### 🎨 **Interactive Visualization**
-- **Real-time Animation** - Watch algorithms explore the grid step-by-step
-- **Adjustable Speed** - Control animation speed with `+` and `-` keys
-- **Color-Coded States** - Distinct colors for visited, path, barriers, etc.
-- **Performance Stats** - Track time, nodes visited, and path length
+**Interactive Controls:**
+- Draw walls by clicking and dragging
+- Generate random mazes with one keypress
+- Adjust animation speed on the fly
+- See real-time stats (time, nodes visited, path length)
 
-### 🧱 **Maze Generation**
-- **Recursive Backtracker** - Generate random, solvable mazes instantly
-- **Custom Walls** - Draw your own barriers with mouse drag
+**Visual Feedback:**
+- Color-coded nodes show algorithm progress
+- Gradient effect shows visit order
+- Clean UI with live statistics
 
-### 📊 **Professional UI**
-- **Live Statistics Panel** - Algorithm name, execution time, visited nodes, path length
-- **Gradient Visualization** - Nodes fade based on visit order
-- **Smooth Animations** - Polished visual experience
+## How to Use
 
----
+**Setup:**
+```bash
+git clone https://github.com/ParjanyaReddy/PathfindingVisualizer.git
+cd PathfindingVisualizer
+pip install -r requirements.txt
+python main.py
+```
 
-## 🎮 Controls
+**Controls:**
+- First click: Place start node (orange)
+- Second click: Place end node (turquoise)  
+- Click and drag: Draw walls
+- Right click: Erase nodes
+- **SPACE**: Run the algorithm
+- **C**: Clear everything
+- **R**: Generate random maze
+- **1-4**: Switch algorithms
+- **+/-**: Adjust speed
 
-| Key/Mouse | Action |
-|-----------|--------|
-| **Left Click (1st)** | Place Start Node (Orange) |
-| **Left Click (2nd)** | Place End Node (Turquoise) |
-| **Left Click + Drag** | Draw Walls (Black) |
-| **Right Click** | Erase Node |
-| **SPACE** | Start Pathfinding |
-| **C** | Clear Board |
-| **R** | Generate Random Maze |
-| **1** | Select BFS Algorithm |
-| **2** | Select DFS Algorithm |
-| **3** | Select Dijkstra Algorithm |
-| **4** | Select A* Algorithm (Default) |
-| **+** | Increase Animation Speed |
-| **-** | Decrease Animation Speed |
-| **ESC** | Cancel/Quit |
-
----
-
-## 🚀 Installation & Setup
-
-### Prerequisites
-- Python 3.8 or higher
-- pip (Python package manager)
-
-### Installation Steps
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/PathfindingVisualizer.git
-   cd PathfindingVisualizer
-   ```
-
-2. **Create a virtual environment** (recommended)
-   ```bash
-   python -m venv venv
-   
-   # Windows
-   venv\Scripts\activate
-   
-   # macOS/Linux
-   source venv/bin/activate
-   ```
-
-3. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. **Run the application**
-   ```bash
-   python main.py
-   ```
-
----
-
-## 📁 Project Structure
+## Project Structure
 
 ```
 PathfindingVisualizer/
-├── algorithms/
-│   ├── __init__.py          # Algorithm exports
-│   ├── astar.py             # A* implementation
-│   ├── bfs.py               # BFS implementation
-│   ├── dfs.py               # DFS implementation
-│   ├── dijkstra.py          # Dijkstra implementation
-│   └── maze.py              # Maze generation
-├── constants.py             # Configuration & colors
-├── grid.py                  # Grid data structure
-├── node.py                  # Node class with state management
-├── renderer.py              # PyGame rendering engine
-├── main.py                  # Application entry point
-├── requirements.txt         # Python dependencies
-└── README.md                # This file
+├── algorithms/        # Each algorithm in its own file
+├── main.py           # Main game loop and event handling
+├── grid.py           # Grid data structure
+├── node.py           # Individual node logic
+├── renderer.py       # Drawing and visualization
+└── constants.py      # Colors, sizes, settings
 ```
 
----
+The code is organized with separation of concerns - algorithms are isolated from rendering, making it easy to add new ones or modify the UI independently.
 
-## 🎯 How It Works
+## How It Works
 
-### Algorithm Flow
-1. **Place Start & End** - Click to set starting and ending points
-2. **Draw Barriers** (Optional) - Create obstacles or generate a maze
-3. **Select Algorithm** - Choose from BFS, DFS, Dijkstra, or A*
-4. **Visualize** - Press SPACE to watch the algorithm in action
-5. **Analyze** - Review performance stats and path efficiency
+Each algorithm is implemented as a generator that yields after visiting each node. This lets the main loop update the display in real-time without blocking. The grid tracks node states, and the renderer handles all PyGame drawing.
 
-### Color Legend
-- 🟧 **Orange** - Start Node
-- 🟦 **Turquoise** - End Node
-- ⬛ **Black** - Barrier/Wall
-- 🟩 **Green** - Visited Node (gradient based on order)
-- 🟪 **Purple** - Final Path
-- ⬜ **White** - Unvisited Node
+**Algorithm Comparison:**
 
----
+| Algorithm | Shortest Path? | Speed | Best For |
+|-----------|---------------|-------|----------|
+| BFS | Yes | Medium | Unweighted graphs |
+| DFS | No | Fast | Exploring all paths |
+| Dijkstra | Yes | Slower | Weighted graphs |
+| A* | Yes | Fastest | When you know the goal |
 
-## 🧠 Algorithm Comparison
+## Technical Details
 
-| Algorithm | Guarantees Shortest Path | Time Complexity | Space Complexity | Best Use Case |
-|-----------|--------------------------|-----------------|------------------|---------------|
-| **BFS** | ✅ Yes (unweighted) | O(V + E) | O(V) | Unweighted graphs |
-| **DFS** | ❌ No | O(V + E) | O(V) | Maze solving, backtracking |
-| **Dijkstra** | ✅ Yes (weighted) | O((V + E) log V) | O(V) | Weighted graphs |
-| **A*** | ✅ Yes (with admissible heuristic) | O(E) | O(V) | Optimal pathfinding |
+- Built with PyGame for rendering and event handling
+- Generator-based algorithm implementation for smooth animation
+- Object-oriented design with clear separation between grid logic and visualization
+- Type hints throughout for better code clarity
 
----
+## What I Learned
 
-## 🛠️ Technical Highlights
+This project helped me understand:
+- How different pathfinding algorithms actually work under the hood
+- The trade-offs between completeness, optimality, and speed
+- Working with PyGame's event loop and rendering
+- Implementing algorithms as generators for step-by-step visualization
 
-- **Object-Oriented Design** - Clean separation of concerns (Grid, Node, Renderer)
-- **Generator-Based Algorithms** - Yield-based animation for smooth visualization
-- **Event-Driven Architecture** - Responsive PyGame event handling
-- **Performance Optimized** - Efficient data structures and rendering
-- **Type Hints** - Full Python type annotations for code clarity
-- **Modular Codebase** - Easy to extend with new algorithms
+## Future Ideas
 
----
+Some things I might add:
+- Bidirectional search
+- Jump Point Search for faster pathfinding
+- More maze generation algorithms
+- Ability to save/load grids
+- Weighted nodes to better show Dijkstra vs A*
 
-## 📈 Future Enhancements
+## License
 
-- [ ] Bidirectional search algorithms
-- [ ] Jump Point Search (JPS)
-- [ ] More maze generation algorithms (Prim's, Kruskal's)
-- [ ] Save/Load grid configurations
-- [ ] Weighted nodes for Dijkstra/A*
-- [ ] Export visualization as GIF/video
+MIT License - feel free to use this for learning or your own projects.
 
 ---
 
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## 👤 Author
-
-**Your Name**
-- GitHub: [@yourusername](https://github.com/yourusername)
-- LinkedIn: [Your LinkedIn](https://linkedin.com/in/yourprofile)
-
----
-
-## 🙏 Acknowledgments
-
-- Built with [PyGame](https://www.pygame.org/)
-- Inspired by classic pathfinding visualizers
-- Algorithms based on standard computer science implementations
-
----
-
-## 📸 Screenshots
-
-*Add screenshots of your visualizer in action here!*
-
----
-
-**⭐ If you found this project helpful, please consider giving it a star!**
+Built with Python and PyGame. Inspired by similar visualizers but implemented from scratch to learn the algorithms deeply.
