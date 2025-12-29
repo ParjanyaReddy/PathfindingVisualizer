@@ -1,23 +1,17 @@
 """
-Pathfinding Algorithm Visualizer - Main Application
+Pathfinding Visualizer
 
-A professional-grade pathfinding visualizer built with Python and PyGame.
-Features BFS, DFS, Dijkstra, A* algorithms and maze generation.
-
-Author: Portfolio Project
-Version: 1.0.0
+Visualize how different pathfinding algorithms work in real-time.
+Supports BFS, DFS, Dijkstra, and A* with maze generation.
 
 Controls:
-    Left Click (1st): Place Start node
-    Left Click (2nd): Place End node
-    Left Click (drag): Draw walls
-    Right Click: Erase node
-    SPACE: Start pathfinding
+    Left Click: Place start, end, or draw walls
+    Right Click: Erase nodes
+    SPACE: Run algorithm
     C: Clear board
-    R: Generate random maze
-    1-4: Select algorithm (BFS, DFS, Dijkstra, A*)
-    +/-: Adjust animation speed
-    ESC: Quit
+    R: Generate maze
+    1-4: Switch algorithms
+    +/-: Adjust speed
 """
 
 import pygame
